@@ -111,7 +111,7 @@ The test file for `Streamer` can be found in `tests/test_streamer.js`.
 
 ### Packer
 
-`Packer` is a transform stream, which passes through a stream of events, and assembles values from chunks, and adds new events with assembled values. It is a companion  for `Streamer`, which frees users from implementing the assembling logic, when it is known that values will fit in the available memory.
+`Packer` is a transform stream, which passes through a stream of events, assembles values from chunks, and adds new events with assembled values. It is a companion  for `Streamer`, which frees users from implementing the assembling logic, when it is known that values will fit in the available memory.
 
 It operates in an [objectMode](http://nodejs.org/api/stream.html#stream_object_mode).
 
@@ -129,7 +129,7 @@ var next = fs.createReadStream(fname).
 `Packer` generates a new event, which passes an assembled value:
 
 ```js
-{name: "value", value: "assembled key value",
+{name: "value", value: "assembled string value",
     row: aRowNumber, col: aColumnNumber}
 ```
 
@@ -160,7 +160,7 @@ fs.createReadStream(fname).
 
 `options` can contain some technical parameters, and it is rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html).
 
-`startRow` and `endRow` receive one paramer: `row`. `startValue` and `endValue` receive two parameters: `row` and `col`. `chunk` and `value` receive three parameters: `value`, `row, and `col`.
+`startRow` and `endRow` receive one paramer: `row`. `startValue` and `endValue` receive two parameters: `row` and `col`. `chunk` and `value` receive three parameters: `value`, `row`, and `col`.
 
 ### Filter
 
@@ -177,7 +177,7 @@ var next = fs.createReadStream(fname).
                 pipe(parser).pipe(streamer).pipe(filter);
 ```
 
-`options` contains some important parameters, and should be specified. It can contain some technical properties thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html). Additionally it recognizes following flags:
+`options` contains some important parameters, and should be specified. It can contain some technical properties thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html). Additionally it recognizes following properties:
 
 * `filter` should be a function. By default it allows all events.
   * This function is called in a context of a `Filter` object with one parameter:
@@ -212,7 +212,7 @@ The constructor of `Source` accepts one mandatory parameter:
 
 * `streams` should be a non-empty array of pipeable streams. At the end the last stream should produce a stream of events.
 
-When a stream ends, `Source` produces an event `end` without parameters.
+`Source` uses the same event arguments as `Emitter` (see above). When a stream ends, `Source` produces an event `end` without parameters.
 
 The test file for `Source` can be found in `tests/test_source.js`.
 
@@ -260,7 +260,7 @@ Obviously, if a bug is found, or a way to simplify existing components, or new g
 
 ## Credits
 
-The test file `tests/sample.csv.gz` is `Master.csv` from [Lahman’s Baseball Database 2012](http://seanlahman.com/baseball-archive/statistics/). The file is copyrighted by Sean Lahman. It is used as a test file under a Creative Commons Attribution-ShareAlike 3.0 Unported License. In order to test all features of the CSV parser, the file was minimally modified: row #1000 has a CRLF inserted in a value, and row #1001 has a double quote inserted in a value, then the file was compressed by gzip.
+The test file `tests/sample.csv.gz` is `Master.csv` from [Lahman’s Baseball Database 2012](http://seanlahman.com/baseball-archive/statistics/). The file is copyrighted by Sean Lahman. It is used here under a Creative Commons Attribution-ShareAlike 3.0 Unported License. In order to test all features of the CSV parser, the file was minimally modified: row #1000 has a CRLF inserted in a value, row #1001 has a double quote inserted in a value, then the file was compressed by gzip.
 
 ## Apendix A: tokens
 
