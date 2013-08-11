@@ -260,7 +260,7 @@ Obviously, if a bug is found, or a way to simplify existing components, or new g
 
 ## Credits
 
-The test file `tests/sample.csv` is `Master.csv` from [Lahman’s Baseball Database](http://seanlahman.com/baseball-archive/statistics/). The file is copyrighted by Sean Lahman. It is used as a test file under a Creative Commons Attribution-ShareAlike 3.0 Unported License. In order to test all features of the CSV parser, the file was minimally modified: row #1000 has a CRLF inserted in a value, and row #1001 has a double quote inserted in a value.
+The test file `tests/sample.csv` is `Master.csv` from [Lahman’s Baseball Database 2012](http://seanlahman.com/baseball-archive/statistics/). The file is copyrighted by Sean Lahman. It is used as a test file under a Creative Commons Attribution-ShareAlike 3.0 Unported License. In order to test all features of the CSV parser, the file was minimally modified: row #1000 has a CRLF inserted in a value, and row #1001 has a double quote inserted in a value.
 
 ## Apendix A: tokens
 
