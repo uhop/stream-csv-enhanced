@@ -2,32 +2,20 @@ var Source   = require("../Source");
 var Parser   = require("../Parser");
 var Streamer = require("../Streamer");
 
-var fs = require("fs"), path = require("path");
+var fs = require("fs"), path = require("path"), zlib = require("zlib");
 
 
 var source = new Source([new Parser(), new Streamer()]);
 
-var objectCounter = 0, arrayCounter = 0, stringCounter = 0, numberCounter = 0,
-	nullCounter = 0, trueCounter = 0, falseCounter = 0, keyCounter = 0;
+var rows = 0, values = 0;
 
-source.on("startObject", function(){ ++objectCounter; });
-source.on("startArray",  function(){ ++arrayCounter; });
-source.on("startKey",    function(){ ++keyCounter; });
-source.on("startString", function(){ ++stringCounter; });
-source.on("startNumber", function(){ ++numberCounter; });
-source.on("nullValue",   function(){ ++nullCounter; });
-source.on("trueValue",   function(){ ++trueCounter; });
-source.on("falseValue",  function(){ ++falseCounter; });
+source.on("startRow", function(){ ++rows; });
+source.on("startValue", function(){ ++values; });
 
 source.on("end", function(){
-	console.log("objects:", objectCounter);
-	console.log("arrays:",  arrayCounter);
-	console.log("keys:",    keyCounter);
-	console.log("strings:", stringCounter);
-	console.log("numbers:", numberCounter);
-	console.log("nulls:",   nullCounter);
-	console.log("trues:",   trueCounter);
-	console.log("falses:",  falseCounter);
+	console.log("rows:",   rows);
+	console.log("values:", values);
 });
 
-fs.createReadStream(path.resolve(__dirname, "sample.json"), {encoding: "utf8"}).pipe(source.input);
+fs.createReadStream(path.resolve(__dirname, "sample.csv.gz")).
+	pipe(zlib.createGunzip()).pipe(source.input);
