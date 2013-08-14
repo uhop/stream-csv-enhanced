@@ -16,15 +16,13 @@
 			text = {id: "text", pattern:
 				new RegExp("[^" + sanitizedSeparator + "\\\"\\u000A\\u000D]{1,256}")};
 
-		var csv = new Grammar();
-
-		csv.addRule("main",    [rule("record"), maybe(crlf, maybe(rule("main")))]);
-		csv.addRule("record",  [rule("field"), repeat(sep, rule("field"))]);
-		csv.addRule("field",   maybe(any(rule("escaped"), rule("value"))));
-		csv.addRule("escaped", ["\"", repeat(any(text, sep, crlf, "\"\"")), "\""]);
-		csv.addRule("value",   [text, repeat(text)]);
-
-		csv.generate();
+		var csv = new Grammar({
+				main:    [rule("record"), maybe(crlf, maybe(rule("main")))],
+				record:  [rule("field"), repeat(sep, rule("field"))],
+				field:   maybe(any(rule("escaped"), rule("value"))),
+				escaped: ["\"", repeat(any(text, sep, crlf, "\"\"")), "\""],
+				value:   [text, repeat(text)]
+			});
 
 		return csv;
 	}
