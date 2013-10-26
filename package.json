@@ -1,6 +1,6 @@
 {
   "name": "stream-csv-enhanced",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "stream-csv-enahnced is a collection of node.js 0.10 stream components for creating custom standard-compliant CSV processors, which requires a minimal memory footprint. It can parse CSV files far exceeding available memory. Even individual data items are streamed piece-wise. Streaming SAX-inspired event-based API is included as well.",
   "homepage": "http://github.com/uhop/stream-csv-enhanced",
   "bugs": "http://github.com/uhop/stream-csv-enhanced/issues",
