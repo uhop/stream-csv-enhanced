@@ -33,6 +33,7 @@ Jsonify.prototype._transform = function(chunk, encoding, done) {
       this._obj[this._header[chunk.col-1]] = chunk.value;
     } else if(chunk.name === 'endRow'){
       this.push(this._obj);
+      this._obj = {}; //!! be sure that a different object (different adresses) is pushed every time
     }
   }
 

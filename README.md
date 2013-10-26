@@ -144,7 +144,7 @@ var Jsonify = require('stream-csv-enhanced/Jsonify')
 
 var jsonify = new Jsonify(options);
 
-var next = createReadStream(fname)
+var next = fs.createReadStream(fname)
   .pipe(streamer).pipe(packer).pipe(jsonify);
 ```
 
