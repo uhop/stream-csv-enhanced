@@ -64,7 +64,7 @@ var parser = new Parser(options);
 var next = fs.createReadStream(fname).pipe(parser);
 ```
 
-`options` can contain some technical parameters, and it is rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html). Additionally it recognizes following properties:
+`options` can contain some technical parameters, and it rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html). Additionally it recognizes following properties:
 
 * `separator` is a one-character string, which is used to separate values in a row. By default it is `,` (a comma).
 
@@ -85,7 +85,7 @@ var next = fs.createReadStream(fname).
                 pipe(parser).pipe(streamer);
 ```
 
-`options` can contain some technical parameters, and it is rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html).
+`options` can contain some technical parameters, and it rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html).
 
 Following is a list of all event objects produced by `Streamer`:
 
@@ -124,7 +124,7 @@ var next = fs.createReadStream(fname).
                 pipe(parser).pipe(streamer).pipe(packer);
 ```
 
-`options` can contain some technical parameters, and it is rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html).
+`options` can contain some technical parameters, and it rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html).
 
 `Packer` generates a new event, which passes an assembled value:
 
@@ -158,7 +158,7 @@ fs.createReadStream(fname).
     pipe(parser).pipe(streamer).pipe(packer).pipe(emitter);
 ```
 
-`options` can contain some technical parameters, and it is rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html).
+`options` can contain some technical parameters, and it rarely needs to be specified. You can find it thoroughly documented in [node.js' Stream documentation](http://nodejs.org/api/stream.html).
 
 `startRow` and `endRow` receive one paramer: `row`. `startValue` and `endValue` receive two parameters: `row` and `col`. `chunk` and `value` receive three parameters: `value`, `row`, and `col`.
 
