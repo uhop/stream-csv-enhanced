@@ -1,10 +1,9 @@
-var Ldjsoner = require('../Ldjsoner')
+var Jsonify = require('../Jsonify')
   , Parser = require('../Parser')
   , Streamer = require('../Streamer')
   , Packer = require('../Packer')
-  , fs = require('fs')
-  , assert = require('assert')
-  , path = require('path');
+  , Readable = require('stream').Readable
+  , assert = require('assert');
 
 var csvdata = [
   ['a', 'b', 'c'],
@@ -19,26 +18,24 @@ var expected = [
   { a: '', b: '8', c: '9' }
 ];
 
-var tpath = path.join(path.dirname(__filename), 'data_test_ldjsoner.csv');
-
-fs.writeFileSync(tpath, csvdata);
-
 var parser = new Parser();
 var streamer = new Streamer();
 var packer = new Packer();
-var ldjsoner = new Ldjsoner();
+var jsonify = new Jsonify();
 
-var stream =  fs.createReadStream(tpath)
-  .pipe(parser)
+var rs = new Readable;
+rs.push(csvdata);
+rs.push(null);
+
+var stream =  rs.pipe(parser)
   .pipe(streamer)
   .pipe(packer)
-  .pipe(ldjsoner);
+  .pipe(jsonify);
 
 var cnt = 0;
 stream.on('data', function(row){
   assert.deepEqual(row, expected[cnt++]);
 });
 stream.on('end', function(){
-  fs.unlinkSync(tpath);
-  console.log('test Ldjsoner ok.')
+  console.log('test Jsonify ok.')
 });

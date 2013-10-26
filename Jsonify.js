@@ -1,9 +1,9 @@
 var Transform = require('stream').Transform
   , util = require('util');
 
-function Ldjsoner(options) {
-  if (!(this instanceof Ldjsoner))
-    return new Ldjsoner(options);
+function Jsonify(options) {
+  if (!(this instanceof Jsonify))
+    return new Jsonify(options);
 
   options = options || {};
   options.objectMode = true;
@@ -15,14 +15,14 @@ function Ldjsoner(options) {
   this._obj = {};
 }
 
-util.inherits(Ldjsoner, Transform);
+util.inherits(Jsonify, Transform);
 
-Ldjsoner.prototype._transform = function(chunk, encoding, done) {
+Jsonify.prototype._transform = function(chunk, encoding, done) {
 
   if(!this._inBody){
 
     if(chunk.name === 'value'){
-      this._header[chunk.col-1] = chunk.value; //why index (chunk.col) are 1-based instead of 0-based ???
+      this._header[chunk.col-1] = chunk.value; //parser uses 1-based index
     } else if(chunk.name === 'endRow'){
       this._inBody = true;
     }
@@ -30,7 +30,7 @@ Ldjsoner.prototype._transform = function(chunk, encoding, done) {
   } else {
     
     if(chunk.name === 'value'){
-      this._obj[this._header[chunk.col-1]] = chunk.value; //why index (chunk.col) are 1-based instead of 0-based ???
+      this._obj[this._header[chunk.col-1]] = chunk.value;
     } else if(chunk.name === 'endRow'){
       this.push(this._obj);
     }
@@ -39,4 +39,4 @@ Ldjsoner.prototype._transform = function(chunk, encoding, done) {
   done();
 };
 
-module.exports = Ldjsoner;
+module.exports = Jsonify;

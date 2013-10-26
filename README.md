@@ -135,6 +135,25 @@ var next = fs.createReadStream(fname).
 
 `value` event always follows `endValue`.
 
+### Jsonify
+
+`Jsonify` is a transform stream (operating in [objectMode](http://nodejs.org/api/stream.html#stream_object_mode)) that can be used after `Packer` to transform the data into a JSON table (an array of objects where the keys are the header of the original CSV).
+
+```js
+var Jsonify = require('stream-csv-enhanced/Jsonify')
+
+var jsonify = new Jsonify(options);
+
+var next = createReadStream(fname)
+  .pipe(streamer).pipe(packer).pipe(jsonify);
+```
+
+The objects emmited correspond to CSV rows and are of the form:
+
+```js
+{ header1: 'value1', header2: 'value2', header3: 'value3' }
+```
+
 
 ### Emitter
 
