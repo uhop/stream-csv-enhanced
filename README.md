@@ -148,7 +148,7 @@ var next = createReadStream(fname)
   .pipe(streamer).pipe(packer).pipe(jsonify);
 ```
 
-The objects emmited correspond to CSV rows and are of the form:
+Objects emitted correspond to CSV rows and are of the form:
 
 ```js
 { header1: 'value1', header2: 'value2', header3: 'value3' }
