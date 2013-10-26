@@ -135,6 +135,7 @@ var next = fs.createReadStream(fname).
 
 `value` event always follows `endValue`.
 
+
 ### Emitter
 
 `Emitter` is a writeable stream, which consumes a stream of events, and emits them on itself.
