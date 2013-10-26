@@ -135,25 +135,47 @@ var next = fs.createReadStream(fname).
 
 `value` event always follows `endValue`.
 
-### Jsonify
+### AsObject
 
-`Jsonify` is a transform stream (operating in [objectMode](http://nodejs.org/api/stream.html#stream_object_mode)) that can be used after `Packer` to transform the data into a JSON table (an array of objects where the keys are the header of the original CSV).
+`AsObject` is a transform stream (operating in [objectMode](http://nodejs.org/api/stream.html#stream_object_mode)) that can be used after `Packer` to transform a row data into an object key-value bag.
 
-```js
-var Jsonify = require('stream-csv-enhanced/Jsonify')
-
-var jsonify = new Jsonify(options);
-
-var next = createReadStream(fname)
-  .pipe(streamer).pipe(packer).pipe(jsonify);
-```
-
-Objects emitted correspond to CSV rows and are of the form:
+This helper assumes that the very first row is a header row, which values are used as names of corresponding columns. The header values are not emitted.
 
 ```js
-{ header1: 'value1', header2: 'value2', header3: 'value3' }
+var AsObject = require("stream-csv-enhanced/AsObject")
+
+var asObject = new AsObject(options);
+
+var next = fs.createReadStream(fname).
+                pipe(parser).pipe(streamer).
+                pipe(packer).pipe(asObject);
 ```
 
+Emitted objects correspond to CSV rows and are of the form:
+
+```js
+{"header1": "value1", "header2": "value2", "header3": "value3"}
+```
+
+### AsArray
+
+`AsArray` is a transform stream (operating in [objectMode](http://nodejs.org/api/stream.html#stream_object_mode)) that can be used after `Packer` to transform a row data into an array.
+
+```js
+var AsArray = require("stream-csv-enhanced/AsArray")
+
+var asArray = new AsArray(options);
+
+var next = fs.createReadStream(fname).
+                pipe(parser).pipe(streamer).
+                pipe(packer).pipe(asArray);
+```
+
+Emitted objects correspond to CSV rows and are of the form:
+
+```js
+["value1", "value2", "value3"]
+```
 
 ### Emitter
 
