@@ -1,4 +1,10 @@
-# stream-csv-enhanced [![Build Status](https://secure.travis-ci.org/uhop/stream-csv-enhanced.png?branch=master)](http://travis-ci.org/uhop/stream-csv-enhanced)
+# stream-csv-enhanced
+
+[![Build status][travis-image]][travis-url]
+[![Dependencies][deps-image]][deps-url]
+[![devDependencies][dev-deps-image]][dev-deps-url]
+[![NPM version][npm-image]][npm-url]
+
 
 `stream-csv-enhanced` is a collection of node.js 0.10 stream components for creating custom standard-compliant CSV processors, which requires a minimal memory footprint. It can parse CSV files far exceeding available memory. Even individual data items are streamed piece-wise. Streaming SAX-inspired event-based API is included as well.
 
@@ -69,6 +75,8 @@ var next = fs.createReadStream(fname).pipe(parser);
 * `separator` is a one-character string, which is used to separate values in a row. By default it is `,` (a comma).
 
 The test file for `Parser` can be found in `tests/test_parser.js`. Actually all test files in `tests/` use `Parser`.
+
+If you want to catch parsing errors, attach an error listener directly to a parser component &mdash; unlike data errors do not travel through stream pipes.
 
 ### Streamer
 
@@ -324,3 +332,13 @@ Following tokens are produced (listed by `id`):
 * `text`: a string of non-escaped characters, used inside a value.
 * `"`: a double quote, used to open and close a quoted value.
 * `""`: a doubled double quote, used to encode a single double quote in a quoted value.
+
+
+[npm-image]:      https://img.shields.io/npm/v/stream-csv-enhanced.svg
+[npm-url]:        https://npmjs.org/package/stream-csv-enhanced
+[deps-image]:     https://img.shields.io/david/uhop/stream-csv-enhanced.svg
+[deps-url]:       https://david-dm.org/uhop/stream-csv-enhanced
+[dev-deps-image]: https://img.shields.io/david/dev/uhop/stream-csv-enhanced.svg
+[dev-deps-url]:   https://david-dm.org/uhop/stream-csv-enhanced#info=devDependencies
+[travis-image]:   https://img.shields.io/travis/uhop/stream-csv-enhanced.svg
+[travis-url]:     https://travis-ci.org/uhop/stream-csv-enhanced
