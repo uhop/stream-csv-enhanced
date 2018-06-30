@@ -6,6 +6,9 @@
 [![NPM version][npm-image]][npm-url]
 
 
+> **Important:** this package has been deprecated in favor of [stream-csv-as-json](https://www.npmjs.com/package/stream-csv-as-json). The new package features better performance and flexibility. Being 100% compatible with [stream-json](https://www.npmjs.com/package/stream-json) leverages existing data processing tools.
+
+
 `stream-csv-enhanced` is a collection of node.js 0.10 stream components for creating custom standard-compliant CSV processors, which requires a minimal memory footprint. It can parse CSV files far exceeding available memory. Even individual data items are streamed piece-wise. Streaming SAX-inspired event-based API is included as well.
 
 The CSV parser is conformant to [RFC 4180: Common Format and MIME Type for Comma-Separated Values (CSV) Files](http://tools.ietf.org/html/rfc4180). It uses a relaxed row separation (CR, LF, or CRLF are allowed), and a user-specified field separator (a comma by default). It implements all standard features including quoted values with CRLF and field separators inside.
